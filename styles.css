@@ -1,4 +1,4 @@
-:root {
+﻿:root {
     --bg-color: #f4eee1;
     /* Authentic Parchment Cream */
     --primary-color: #0f3d2e;
@@ -665,3 +665,37 @@ h3,
         font-size: 2.2rem;
     }
 }
+
+/* Surah Selector Styling */
+.surah-selector {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 8px 20px;
+    border-radius: 30px;
+    border: 1px solid var(--accent-light);
+    margin-right: 15px;
+}
+
+/* Repeat Button Styling */
+.repeat-btn {
+    font-size: 1.2rem;
+    position: relative;
+}
+
+.repeat-btn.active {
+    background: var(--gold-bright);
+    color: var(--primary-color);
+    box-shadow: 0 0 15px var(--gold-bright);
+}
+
+.repeat-btn.active::after {
+    content: "�";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8rem;
+}
+
+
+

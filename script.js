@@ -49,12 +49,15 @@ const reciters = [
 // State
 let currentReciterId = reciters[0].id;
 let currentPlayingSurah = null;
+let isRepeat = false;
 
 // DOM Elements
 const surahGrid = document.getElementById('surah-grid');
 const reciterSelect = document.getElementById('reciter-select');
+const surahSelect = document.getElementById('surah-select');
 const mainAudio = document.getElementById('main-audio');
 const playPauseBtn = document.getElementById('play-pause-btn');
+const repeatBtn = document.getElementById('repeat-btn');
 const progressBar = document.getElementById('progress-bar');
 const currentTimeEl = document.getElementById('current-time');
 const totalDurationEl = document.getElementById('total-duration');
@@ -68,6 +71,7 @@ const closeModalBtn = document.getElementById('close-modal-btn');
 // Initialize
 function init() {
     populateReciters();
+    populateSurahsSelect();
 
     // Check for query params
     const urlParams = new URLSearchParams(window.location.search);
@@ -87,6 +91,8 @@ function init() {
         if (surah) {
             setupAudio(surah);
             updatePageSEO(surah);
+            surahSelect.value = surah.number;
+            renderSurahs(surah.number); // Filter to this surah if in URL
         }
     }
 
@@ -102,10 +108,25 @@ function populateReciters() {
     });
 }
 
-function renderSurahs() {
+function populateSurahsSelect() {
+    surahSelect.innerHTML = '<option value="">الكل (جميع السور)</option>';
+    // In a real app, you might filter 'surahs' based on 'currentReciterId' here
+    surahs.forEach(surah => {
+        const option = document.createElement('option');
+        option.value = surah.number;
+        option.textContent = surah.name;
+        surahSelect.appendChild(option);
+    });
+}
+
+function renderSurahs(filterNumber = null) {
     surahGrid.innerHTML = '';
 
-    surahs.forEach(surah => {
+    const surahsToShow = filterNumber
+        ? surahs.filter(s => s.number === parseInt(filterNumber))
+        : surahs;
+
+    surahsToShow.forEach(surah => {
         const surahNumStr = surah.number.toString().padStart(3, '0');
         const card = document.createElement('div');
         card.className = 'surah-card';
@@ -121,8 +142,8 @@ function renderSurahs() {
                 <button class="btn btn-artistic" onclick="playSurah(${surah.number})">
                     <span class="icon">▶</span> <span>استمع</span>
                 </button>
-                <a href="audio/${currentReciterId}/${surahNumStr}-${currentReciterId}.mp3" 
-                   class="btn-download-small" 
+                <a href="audio/${currentReciterId}/${surahNumStr}-${currentReciterId}.mp3"
+                   class="btn-download-small"
                    download="سورة-${surah.name}.mp3">
                     <span>تحميل السورة</span>
                 </a>
@@ -190,11 +211,13 @@ function setupEventListeners() {
     // Reciter change
     reciterSelect.addEventListener('change', (e) => {
         currentReciterId = parseInt(e.target.value);
-        renderSurahs(); // Re-render to update download links
+        renderSurahs(surahSelect.value); // Keep current filter
+    });
 
-        // If something is playing, update its source too? 
-        // Better to let user manual restart or just finish current.
-        // For production, usually we keep playing current but update the path for NEXT plays.
+    // Surah filter change
+    surahSelect.addEventListener('change', (e) => {
+        const surahNum = e.target.value;
+        renderSurahs(surahNum);
     });
 
     // Play/Pause button
@@ -208,6 +231,13 @@ function setupEventListeners() {
             mainAudio.pause();
             updatePlayPauseUI(false);
         }
+    });
+
+    // Repeat mode toggle
+    repeatBtn.addEventListener('click', () => {
+        isRepeat = !isRepeat;
+        repeatBtn.classList.toggle('active', isRepeat);
+        mainAudio.loop = isRepeat;
     });
 
     // Progress bar
@@ -230,7 +260,9 @@ function setupEventListeners() {
 
     // Handle end of audio
     mainAudio.addEventListener('ended', () => {
-        updatePlayPauseUI(false);
+        if (!isRepeat) {
+            updatePlayPauseUI(false);
+        }
     });
 
     // Modal Close

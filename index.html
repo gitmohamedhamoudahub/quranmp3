@@ -42,6 +42,13 @@
                         <!-- Reciters will be populated by JS -->
                     </select>
                 </div>
+                <div class="surah-selector">
+                    <label for="surah-select">اختر السورة:</label>
+                    <select id="surah-select" class="styled-select">
+                        <option value="">-- اختر السورة --</option>
+                        <!-- Surahs will be populated by JS -->
+                    </select>
+                </div>
             </div>
         </div>
         <div class="header-divider">
@@ -75,6 +82,9 @@
                 <audio id="main-audio" preload="none"></audio>
                 <button id="play-pause-btn" class="player-btn" aria-label="تشغيل">
                     <span class="icon-play">▶</span>
+                </button>
+                <button id="repeat-btn" class="player-btn repeat-btn" aria-label="تكرار">
+                    <span class="icon-repeat">↻</span>
                 </button>
 
                 <div class="progress-container">
