@@ -1,0 +1,6 @@
+.gemini/
+.agent/
+brain/
+*.log
+node_modules/
+.DS_Store

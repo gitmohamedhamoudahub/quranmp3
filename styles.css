@@ -1,0 +1,667 @@
+:root {
+    --bg-color: #f4eee1;
+    /* Authentic Parchment Cream */
+    --primary-color: #0f3d2e;
+    /* Deep Forest Green */
+    --accent-color: #b8860b;
+    /* Dark Goldenrod */
+    --gold-bright: #ffd700;
+    /* Pure Gold */
+    --gold-gradient: linear-gradient(135deg, #b8860b 0%, #ffd700 50%, #b8860b 100%);
+    --accent-light: #d4af37;
+    --text-color: #1a1a1a;
+    --card-bg: #ffffff;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    background-image:
+        url("https://www.transparenttextures.com/patterns/parchment.png"),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+    color: var(--text-color);
+    font-family: 'Cairo', sans-serif;
+    line-height: 1.6;
+    direction: rtl;
+    unicode-bidi: isolate;
+    padding-bottom: 120px;
+}
+
+h1,
+h2,
+h3,
+.current-surah-name {
+    font-family: 'Amiri', serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Header with Mihrab Design */
+.main-header {
+    background: var(--primary-color);
+    color: white;
+    padding: 60px 0 100px 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: -40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.mihrab-arch {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    height: 350px;
+    border: 3px solid var(--accent-light);
+    border-radius: 125px 125px 0 0;
+    opacity: 0.2;
+    pointer-events: none;
+}
+
+.header-ornament {
+    font-size: 1.5rem;
+    color: var(--gold-bright);
+    margin: 10px 0;
+}
+
+.site-title {
+    font-size: 3rem;
+    margin: 10px 0;
+    color: var(--gold-bright);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.site-subtitle {
+    font-size: 1.4rem;
+    opacity: 0.9;
+    border-top: 1px solid var(--accent-light);
+    border-bottom: 1px solid var(--accent-light);
+    display: inline-block;
+    padding: 5px 20px;
+    margin-top: 10px;
+}
+
+.header-divider {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+}
+
+.controls {
+    margin-top: 40px;
+    position: relative;
+    z-index: 10;
+}
+
+.reciter-selector {
+    display: inline-block;
+    background: rgba(0, 0, 0, 0.3);
+    padding: 12px 25px;
+    border-radius: 30px;
+    border: 1px solid var(--accent-light);
+}
+
+.styled-select {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    font-family: 'Cairo', sans-serif;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.styled-select option {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+}
+
+
+/* Audio Player */
+.audio-player-fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: var(--primary-color);
+    color: white;
+    padding: 20px 0;
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    border-top: 2px solid var(--accent-light);
+}
+
+.player-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.now-playing {
+    flex: 1;
+}
+
+.current-surah-name {
+    font-size: 1.6rem;
+    color: var(--gold-bright);
+    display: block;
+}
+
+.current-reciter-name {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.player-controls {
+    flex: 2;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.player-btn {
+    background: var(--gold-gradient);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.player-btn:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.progress-container {
+    flex: 1;
+}
+
+.styled-range {
+    width: 100%;
+    accent-color: var(--gold-bright);
+    cursor: pointer;
+    height: 6px;
+    border-radius: 3px;
+}
+
+.time-info {
+    font-size: 0.8rem;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 5px;
+    color: var(--accent-light);
+}
+
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    backdrop-filter: blur(8px);
+}
+
+.modal-overlay[aria-hidden="false"] {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--bg-color);
+    background-image: url("https://www.transparenttextures.com/patterns/parchment.png");
+    width: 90%;
+    max-width: 450px;
+    padding: 50px 30px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--accent-light);
+    position: relative;
+}
+
+.modal-header h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.modal-body {
+    margin-bottom: 35px;
+    color: var(--text-color);
+    font-size: 1.2rem;
+}
+
+/* Loading */
+.loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 100px;
+    font-size: 1.5rem;
+    color: var(--primary-color);
+    font-family: 'Amiri', serif;
+}
+
+@media (max-width: 768px) {
+    .site-title {
+        font-size: 2.2rem;
+    }
+
+    .player-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .player-controls {
+        width: 100%;
+    }
+
+    body {
+        padding-bottom: 180px;
+    }
+}
+
+/* Artistic Surah Cards v3 */
+.surah-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 40px;
+    padding-top: 80px;
+}
+
+.surah-card {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    position: relative;
+    height: 480px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.surah-card:hover {
+    transform: translateY(-10px);
+}
+
+/* Outer Arch Design */
+.card-outer-frame {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #fdfaf3;
+    background-image: url("https://www.transparenttextures.com/patterns/parchment.png");
+    border-radius: 150px 150px 20px 20px;
+    border: 1px solid #dcd0b9;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.card-outer-frame::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border: 1px solid rgba(184, 134, 11, 0.2);
+    border-radius: 142px 142px 15px 15px;
+}
+
+/* Inner Circular Frame */
+.card-inner-circle {
+    position: relative;
+    z-index: 2;
+    margin-top: 40px;
+    width: 240px;
+    height: 240px;
+    border-radius: 50%;
+    background: #fffdf9;
+    border: 12px solid #0f3d2e;
+    /* Primary Green Ring */
+    box-shadow:
+        inset 0 0 20px rgba(0, 0, 0, 0.1),
+        0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+/* Golden Decorative Ring */
+.card-inner-circle::before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    left: -18px;
+    right: -18px;
+    bottom: -18px;
+    border-radius: 50%;
+    border: 4px solid var(--accent-color);
+    background: transparent;
+    z-index: -1;
+}
+
+/* Number Plate at Top */
+.card-number-plate {
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0f3d2e;
+    color: var(--gold-bright);
+    width: 60px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Amiri', serif;
+    font-size: 1.4rem;
+    font-weight: bold;
+    clip-path: polygon(0% 20%, 50% 0%, 100% 20%, 100% 100%, 0% 100%);
+    border: 2px solid var(--accent-light);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.surah-name {
+    font-family: 'Amiri', serif;
+    font-size: 2.8rem;
+    color: #1a1a1a;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    margin: 0;
+    text-decoration: none;
+    z-index: 3;
+    transition: var(--transition);
+}
+
+.surah-name:hover {
+    color: var(--accent-color);
+}
+
+/* Card Actions Container */
+.card-info {
+    position: relative;
+    z-index: 2;
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-artistic {
+    background: #1b4d3e;
+    color: #ffd700;
+    border: 2px solid #b8860b;
+    border-radius: 30px;
+    padding: 12px 35px;
+    font-family: 'Cairo', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: var(--transition);
+}
+
+.btn-artistic:hover {
+    background: var(--gold-gradient);
+    color: #0f3d2e;
+    transform: scale(1.05);
+}
+
+.btn-artistic .icon {
+    font-size: 1.2rem;
+}
+
+.btn-download-small {
+    background: transparent;
+    color: #0f3d2e;
+    border-bottom: 2px solid var(--accent-color);
+    padding: 5px 10px;
+    font-size: 0.9rem;
+    text-decoration: none;
+    font-weight: bold;
+    transition: var(--transition);
+}
+
+.btn-download-small:hover {
+    color: var(--accent-color);
+    letter-spacing: 1px;
+}
+
+/* Ornaments */
+.ornament-corner {
+    position: absolute;
+    bottom: 20px;
+    font-size: 1.5rem;
+    color: rgba(184, 134, 11, 0.2);
+}
+
+.ornament-left {
+    left: 30px;
+}
+
+.ornament-right {
+    right: 30px;
+}
+
+/* Final Refinements for V3 */
+.surah-card:hover .card-inner-circle {
+    transform: scale(1.05);
+    border-color: var(--accent-light);
+    box-shadow:
+        inset 0 0 30px rgba(0, 0, 0, 0.1),
+        0 8px 25px rgba(184, 134, 11, 0.4);
+}
+
+.card-number-plate {
+    clip-path: polygon(50% 0%, 90% 20%, 100% 60%, 100% 100%, 0% 100%, 0% 60%, 10% 20%);
+    padding-top: 5px;
+}
+
+.surah-name span {
+    display: block;
+    line-height: 1;
+}
+
+.btn-artistic span {
+    pointer-events: none;
+}
+
+/* Resize for 5 per row */
+.surah-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.surah-card {
+    height: 380px;
+}
+
+.card-outer-frame {
+    border-radius: 100px 100px 15px 15px;
+}
+
+.card-inner-circle {
+    width: 170px;
+    height: 170px;
+    margin-top: 30px;
+    border-width: 8px;
+}
+
+.card-inner-circle::before {
+    top: -12px;
+    left: -12px;
+    right: -12px;
+    bottom: -12px;
+}
+
+.surah-name {
+    font-size: 1.8rem;
+}
+
+.card-number-plate {
+    width: 45px;
+    height: 35px;
+    font-size: 1.1rem;
+    top: -15px;
+}
+
+.btn-artistic {
+    padding: 8px 20px;
+    font-size: 0.9rem;
+}
+
+.card-info {
+    margin-top: 20px;
+    gap: 10px;
+}
+
+.ornament-corner {
+    bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.ornament-left {
+    left: 15px;
+}
+
+.ornament-right {
+    right: 15px;
+}
+
+@media (min-width: 1200px) {
+    .surah-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+/* Hero Section Refinement */
+.main-header {
+    background-image:
+        linear-gradient(rgba(15, 61, 46, 0.8), rgba(15, 61, 46, 0.8)),
+        url('quran_hero_banner_1770050011922.png');
+    background-size: cover;
+    background-position: center;
+    padding: 30px 0 60px 0;
+    /* Reduced height */
+    margin-bottom: -20px;
+}
+
+.mihrab-arch {
+    height: 200px;
+    /* Reduced for smaller header */
+    width: 180px;
+    top: 10px;
+}
+
+.site-title {
+    font-size: 2.2rem;
+    margin: 5px 0;
+}
+
+.site-subtitle {
+    font-size: 1.1rem;
+    padding: 2px 15px;
+}
+
+.header-divider {
+    height: 60px;
+    /* Slimmer wave */
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.reciter-selector {
+    padding: 8px 20px;
+}
+
+@media (max-width: 768px) {
+    .main-header {
+        padding: 20px 0 40px 0;
+    }
+
+    .site-title {
+        font-size: 1.8rem;
+    }
+}
+/* Bismillah Banner Section */
+.bismillah-section {
+    padding: 40px 0 20px 0;
+    text-align: center;
+    position: relative;
+    z-index: 5;
+}
+
+.bismillah-banner {
+    max-width: 800px;
+    width: 90%;
+    height: auto;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+    transition: var(--transition);
+}
+
+.bismillah-banner:hover {
+    transform: scale(1.02);
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+@media (max-width: 768px) {
+    .bismillah-section {
+        padding: 20px 0 10px 0;
+    }
+}
+
+/* Bismillah Text Styling */
+.bismillah-text {
+    font-family: 'Amiri', serif;
+    font-size: 3.5rem;
+    color: var(--primary-color);
+    margin: 0;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+    font-weight: normal;
+}
+
+@media (max-width: 768px) {
+    .bismillah-text {
+        font-size: 2.2rem;
+    }
+}
