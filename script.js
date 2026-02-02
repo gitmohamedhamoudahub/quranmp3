@@ -1,6 +1,32 @@
 // Surah Metadata (Juz' Amma: 78 - 114)
 const surahs = [
-
+    { number: 78, name: "النبأ" },
+    { number: 79, name: "النازعات" },
+    { number: 80, name: "عبس" },
+    { number: 81, name: "التكوير" },
+    { number: 82, name: "الانفطار" },
+    { number: 83, name: "المطففين" },
+    { number: 84, name: "الانشقاق" },
+    { number: 85, name: "البروج" },
+    { number: 86, name: "الطارق" },
+    { number: 87, name: "الأعلى" },
+    { number: 88, name: "الغاشية" },
+    { number: 89, name: "الفجر" },
+    { number: 90, name: "البلد" },
+    { number: 91, name: "الشمس" },
+    { number: 92, name: "الليل" },
+    { number: 93, name: "الضحى" },
+    { number: 94, name: "الشرح" },
+    { number: 95, name: "التين" },
+    { number: 96, name: "العلق" },
+    { number: 97, name: "القدر" },
+    { number: 98, name: "البينة" },
+    { number: 99, name: "الزلزلة" },
+    { number: 100, name: "العاديات" },
+    { number: 101, name: "القارعة" },
+    { number: 102, name: "التكاثر" },
+    { number: 103, name: "العصر" },
+    { number: 104, name: "الهمزة" },
     { number: 105, name: "الفيل" },
     { number: 106, name: "قريش" },
     { number: 107, name: "الماعون" },
@@ -13,10 +39,10 @@ const surahs = [
     { number: 114, name: "الناس" }
 ];
 
+
 // Reciter Metadata
 const reciters = [
     { id: 99, name: "المصحف المعلم" },
-    { id: 5, name: "الشيخ محمود خليل الحصري" },
 
 ];
 
