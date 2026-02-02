@@ -30,22 +30,25 @@
     <header class="main-header">
         <div class="mihrab-arch"></div>
         <div class="container">
+            <div class="lang-switcher-container">
+                <button id="lang-btn" class="lang-btn">English</button>
+            </div>
             <div class="header-ornament">✦</div>
-            <h1 class="site-title">القرآن الكريم – سور جزء عم</h1>
-            <p class="site-subtitle">تلاوات مختارة بجودة عالية</p>
+            <h1 class="site-title" data-i18n="site_title">القرآن الكريم – سور جزء عم</h1>
+            <p class="site-subtitle" data-i18n="site_subtitle">تلاوات مختارة بجودة عالية</p>
             <div class="header-ornament">✦</div>
 
             <div class="controls">
                 <div class="reciter-selector">
-                    <label for="reciter-select">اختر القارئ:</label>
+                    <label for="reciter-select" data-i18n="select_reciter">اختر القارئ:</label>
                     <select id="reciter-select" class="styled-select">
                         <!-- Reciters will be populated by JS -->
                     </select>
                 </div>
                 <div class="surah-selector">
-                    <label for="surah-select">اختر السورة:</label>
+                    <label for="surah-select" data-i18n="select_surah">اختر السورة:</label>
                     <select id="surah-select" class="styled-select">
-                        <option value="">-- اختر السورة --</option>
+                        <option value="" data-i18n="all_surahs">الكل (جميع السور)</option>
                         <!-- Surahs will be populated by JS -->
                     </select>
                 </div>
@@ -67,7 +70,7 @@
     <main class="container">
         <div id="surah-grid" class="surah-grid">
             <!-- Surah cards will be populated by JS -->
-            <div class="loading">جاري تحميل السور...</div>
+            <div class="loading" data-i18n="loading">جاري تحميل السور...</div>
         </div>
     </main>
 
@@ -101,14 +104,14 @@
         <div class="modal-content">
             <div class="modal-header">
                 <span class="modal-ornament">✦</span>
-                <h2 id="modal-title">تنبيه</h2>
+                <h2 id="modal-title" data-i18n="error_title">تنبيه</h2>
                 <span class="modal-ornament">✦</span>
             </div>
             <div class="modal-body">
                 <p id="modal-message"></p>
             </div>
             <div class="modal-footer">
-                <button id="close-modal-btn" class="btn btn-play">موافق</button>
+                <button id="close-modal-btn" class="btn btn-play" data-i18n="ok">موافق</button>
             </div>
         </div>
     </div>
