@@ -58,10 +58,10 @@ const translations = {
         error_title: "تنبيه",
         error_message: "عذراً، تعذر تشغيل الملف الصوتي. تأكد من وجود الملف في المسار الصحيح.",
         ok: "موافق",
-        lang: "English"
+        lang: "اللغة العربية"
     },
     en: {
-        site_title: "Noble Quran – Juz' Amma",
+        site_title: "Holy Quran – Juz' Amma",
         site_subtitle: "Selected Recitations in High Quality",
         select_reciter: "Choose Reciter:",
         select_surah: "Choose Surah:",
@@ -73,7 +73,7 @@ const translations = {
         error_title: "Notice",
         error_message: "Sorry, audio playback failed. Please ensure the file exists.",
         ok: "OK",
-        lang: "العربية"
+        lang: "English"
     }
 };
 
